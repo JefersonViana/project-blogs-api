@@ -1,6 +1,6 @@
 const express = require('express');
 const { userController } = require('../controllers');
-const { validationField } = require('../middlewares/validationField');
+const validationField = require('../middlewares/validationField');
 
 const loginRoute = express();
 

@@ -8,6 +8,13 @@ const getUserByEmail = async (email) => {
   return responseModel;
 };
 
+const createUser = async ({ email, displayName, password, image = null }) => {
+  const createdUser = await User.create({ email, displayName, password, image })
+
+  return createdUser;
+};
+
 module.exports = {
   getUserByEmail,
+  createUser,
 };

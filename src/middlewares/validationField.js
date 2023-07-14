@@ -17,6 +17,4 @@ const validationField = async (req, res, next) => {
   return next();
 };
 
-module.exports = {
-  validationField,
-};
+module.exports = validationField;

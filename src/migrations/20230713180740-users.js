@@ -24,13 +24,14 @@ module.exports = {
         type: Sequelize.STRING,
       },
       image: {
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null,
         type: Sequelize.STRING,
       },
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.droptable('users');
+    await queryInterface.dropTable('users');
   }
 };

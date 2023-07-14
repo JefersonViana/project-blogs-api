@@ -15,16 +15,15 @@ const getUserByEmail = async (req, res) => {
 };
 
 const getAllUsers = async (req, res) => {
-  const { authorization } = req.headers;
-  if (!authorization) return res.status(401).json({ message:'Token not found' });
-  try {
-    jwt.verify(authorization.split(' ')[1], secret);
+  const allUsers = await userService.getAllUsers();
+  return res.status(200).json(allUsers);
+};
 
-    const allUsers = await userService.getAllUsers();
-    return res.status(200).json(allUsers);
-  } catch (error) {
-    return res.status(401).json({ message: 'Expired or invalid token' });
-  }
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+  const user = await userService.getUserById(id);
+  if (!user) return res.status(404).json({ message: 'User does not exist' });
+  return res.status(200).json(user);
 };
 
 const createUser = async (req, res) => {
@@ -45,4 +44,5 @@ module.exports = {
   getUserByEmail,
   createUser,
   getAllUsers,
+  getUserById,
 };

@@ -5,6 +5,6 @@ const checkEmail = require('../middlewares/checkEmail');
 
 const userRoute = express();
 
-userRoute.post('/', checkValuesFields, checkEmail, userController.createUser)
+userRoute.post('/', checkValuesFields, checkEmail, userController.createUser);
 
 module.exports = userRoute;

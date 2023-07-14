@@ -9,7 +9,7 @@ const getUserByEmail = async (email) => {
 };
 
 const createUser = async ({ email, displayName, password, image = null }) => {
-  const createdUser = await User.create({ email, displayName, password, image })
+  const createdUser = await User.create({ email, displayName, password, image });
 
   return createdUser;
 };

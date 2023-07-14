@@ -8,6 +8,11 @@ const getUserByEmail = async (email) => {
   return responseModel;
 };
 
+const getAllUsers = async () => {
+  const responseModel = await User.findAll({ attributes: { exclude: ['password'] } });
+  return responseModel;
+};
+
 const createUser = async ({ email, displayName, password, image = null }) => {
   const createdUser = await User.create({ email, displayName, password, image });
 
@@ -17,4 +22,5 @@ const createUser = async ({ email, displayName, password, image = null }) => {
 module.exports = {
   getUserByEmail,
   createUser,
+  getAllUsers,
 };

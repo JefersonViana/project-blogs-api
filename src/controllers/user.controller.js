@@ -14,6 +14,19 @@ const getUserByEmail = async (req, res) => {
   return res.status(200).json({ token });
 };
 
+const getAllUsers = async (req, res) => {
+  const { authorization } = req.headers;
+  if (!authorization) return res.status(401).json({ message:'Token not found' });
+  try {
+    jwt.verify(authorization.split(' ')[1], secret);
+
+    const allUsers = await userService.getAllUsers();
+    return res.status(200).json(allUsers);
+  } catch (error) {
+    return res.status(401).json({ message: 'Expired or invalid token' });
+  }
+};
+
 const createUser = async (req, res) => {
   const { email, displayName, password, image } = req.body;
   const userExist = await userService.getUserByEmail(email);
@@ -31,4 +44,5 @@ const createUser = async (req, res) => {
 module.exports = {
   getUserByEmail,
   createUser,
+  getAllUsers,
 };

@@ -4,6 +4,7 @@ const { categoriesController } = require('../controllers');
 
 const categoriesRoute = express();
 
+categoriesRoute.get('/', validateToken, categoriesController.getAllCategories);
 categoriesRoute.post('/', validateToken, categoriesController.createCategory);
 
 module.exports = categoriesRoute;

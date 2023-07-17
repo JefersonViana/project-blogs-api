@@ -6,7 +6,8 @@ const validateToken = (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) return res.status(401).json({ message: 'Token not found' });
   try {
-    jwt.verify(authorization.replace('Bearer ', ''), secret);
+    const payload = jwt.verify(authorization.replace('Bearer ', ''), secret);
+    req.payload = payload;
     return next();
   } catch (error) {
     return res.status(401).json({ message: 'Expired or invalid token' });

@@ -13,18 +13,21 @@ const categoriesExists = async (array) => {
 
 const validateCategoriesExists = async (req, res, next) => {
   const { title, content, categoryIds } = req.body;
-
-  if (!title || !content || !categoryIds) return res.status(400).json({ message: 'Some required fields are missing' });
+  const arr = [!title, !content, !categoryIds];
+  if (arr.some((i) => i === true)) {
+    return res.status(400).json(
+      { message: 'Some required fields are missing' },
+    );
+  }
   
   const exists = await categoriesExists(categoryIds);
-  if (!(Array.isArray(categoryIds)) || !exists) return res.status(400).json({ message: 'one or more "categoryIds" not found' });
-  
+  if (!(Array.isArray(categoryIds)) || !exists) {
+    return res.status(400).json(
+      { message: 'one or more "categoryIds" not found' },
+    );
+  }
 
-  // const createdBlogPost = await categoriesServices.createBlogPost(req.body);
-
-  // return res.status(201).json(createdBlogPost);
-  if (content) return res.status(201).json(exists);
-  next()
+  next();
 };
 
 module.exports = {

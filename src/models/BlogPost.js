@@ -18,14 +18,17 @@ module.exports = (sequelize, DataTypes) => {
       },
       userId: {
         allowNull: false,
+        foreignKey: true,
         type: DataTypes.INTEGER,
       },
       published: {
         allowNull: true,
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
         type: DataTypes.DATE,
       },
       updated: {
         allowNull: true,
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
         type: DataTypes.DATE,
       },
     },
@@ -39,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(
       models.User,
-      { foreignKey: { name: 'userId', field: 'user_id' }, as: 'users' },
+      { foreignKey: 'userId', as: 'users' },
     );
   };
 

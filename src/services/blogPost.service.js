@@ -4,7 +4,7 @@ const { BlogPost, User, sequelize, PostCategory, Category } = require('../models
 // const env = process.env.NODE_ENV || 'development';
 // const sequelize = new Sequelize(config[env]);
 
-const getPostsByUserId = async () => {
+const getAllPosts = async () => {
   const response = await BlogPost.findAll(
     { include: [
     { model: User, as: 'user', attributes: { exclude: ['password'] } },
@@ -12,6 +12,20 @@ const getPostsByUserId = async () => {
     ],
   },
 );
+
+  return response;
+};
+
+const getPostById = async (id) => {
+  const response = await BlogPost.findByPk(
+    id,
+    { include: [
+    { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  },
+);
+
   return response;
 };
 
@@ -32,5 +46,6 @@ const createBlogPost = async ({ title, content, categoryIds }, userId) => {
 
 module.exports = {
   createBlogPost,
-  getPostsByUserId,
+  getAllPosts,
+  getPostById,
 };

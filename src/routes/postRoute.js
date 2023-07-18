@@ -5,7 +5,8 @@ const { validateCategoriesExists } = require('../middlewares/validateCategoriesE
 
 const postRoute = express();
 
-postRoute.get('/', validateToken, blogPostController.getPostsByUserId);
+postRoute.get('/', validateToken, blogPostController.getAllPosts);
+postRoute.get('/:id', validateToken, blogPostController.getPostById);
 postRoute.post('/', validateToken, validateCategoriesExists, blogPostController.createBlogPost);
 
 module.exports = postRoute;

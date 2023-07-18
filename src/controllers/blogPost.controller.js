@@ -1,10 +1,10 @@
 const { blogPostServices } = require('../services');
 
-// const getAllCategories = async (req, res) => {
-//   const allCategories = await categoriesServices.getAllCategories();
+const getPostsByUserId = async (req, res) => {
+  const getPostsUser = await blogPostServices.getPostsByUserId();
 
-//   return res.status(200).json(allCategories);
-// };
+  return res.status(200).json(getPostsUser);
+};
 
 const createBlogPost = async (req, res) => {
   const { payload } = req;
@@ -16,5 +16,5 @@ const createBlogPost = async (req, res) => {
 
 module.exports = {
   createBlogPost,
-  // getAllCategories,
+  getPostsByUserId,
 };

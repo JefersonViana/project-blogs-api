@@ -39,10 +39,7 @@ const putPostById = async (id, { title, content }) => {
 };
 
 const deletePostById = async (id) => {
-  const response = await BlogPost.destroy(
-    { where: { id } },
-);
-
+  const response = await BlogPost.destroy({ where: { id } });
   return response;
 };
 

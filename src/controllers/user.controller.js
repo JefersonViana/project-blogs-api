@@ -40,9 +40,17 @@ const createUser = async (req, res) => {
   return res.status(201).json({ token });
 };
 
+const deleteUserById = async (req, res) => {
+  const { id } = req.payload;
+  await userService.deleteUserById(id);
+  
+  return res.sendStatus(204);
+};
+
 module.exports = {
   getUserByEmail,
   createUser,
   getAllUsers,
   getUserById,
+  deleteUserById,
 };

@@ -29,6 +29,15 @@ const getPostById = async (id) => {
   return response;
 };
 
+const putPostById = async (id, { title, content }) => {
+  const response = await BlogPost.update(
+    { title, content },
+    { where: { id } },
+);
+
+  return response;
+};
+
 const createBlogPost = async ({ title, content, categoryIds }, userId) => {
   const response = await sequelize.transaction(async (t) => {
     const createdPost = await BlogPost.create(
@@ -48,4 +57,5 @@ module.exports = {
   createBlogPost,
   getAllPosts,
   getPostById,
+  putPostById,
 };

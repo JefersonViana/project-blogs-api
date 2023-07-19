@@ -13,6 +13,14 @@ const getPostById = async (req, res) => {
   return res.status(200).json(getPostByIdDb);
 };
 
+const putPostById = async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  await blogPostServices.putPostById(id, { title, content });
+  const getPostUpdated = await blogPostServices.getPostById(id);
+  return res.status(200).json(getPostUpdated);
+};
+
 const createBlogPost = async (req, res) => {
   const { payload } = req;
   const userId = payload.id;
@@ -25,4 +33,5 @@ module.exports = {
   createBlogPost,
   getAllPosts,
   getPostById,
+  putPostById,
 };

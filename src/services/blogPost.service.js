@@ -38,6 +38,14 @@ const putPostById = async (id, { title, content }) => {
   return response;
 };
 
+const deletePostById = async (id) => {
+  const response = await BlogPost.destroy(
+    { where: { id } },
+);
+
+  return response;
+};
+
 const createBlogPost = async ({ title, content, categoryIds }, userId) => {
   const response = await sequelize.transaction(async (t) => {
     const createdPost = await BlogPost.create(
@@ -58,4 +66,5 @@ module.exports = {
   getAllPosts,
   getPostById,
   putPostById,
+  deletePostById,
 };

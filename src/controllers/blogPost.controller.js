@@ -21,6 +21,13 @@ const putPostById = async (req, res) => {
   return res.status(200).json(getPostUpdated);
 };
 
+const deletePostById = async (req, res) => {
+  const { id } = req.params;
+  await blogPostServices.deletePostById(id);
+  
+  return res.sendStatus(204);
+};
+
 const createBlogPost = async (req, res) => {
   const { payload } = req;
   const userId = payload.id;
@@ -34,4 +41,5 @@ module.exports = {
   getAllPosts,
   getPostById,
   putPostById,
+  deletePostById,
 };

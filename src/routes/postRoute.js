@@ -8,6 +8,7 @@ const validateFieldsToUpdateAnPost = require('../middlewares/validateFieldsToUpd
 const postRoute = express();
 
 postRoute.get('/', validateToken, blogPostController.getAllPosts);
+postRoute.get('/search', validateToken, blogPostController.getAllPostsByQuery);
 postRoute.get('/:id', validateToken, blogPostController.getPostById);
 postRoute.post('/', validateToken, validateCategoriesExists, blogPostController.createBlogPost);
 postRoute.put(
